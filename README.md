@@ -41,4 +41,4 @@ A Imersão Dev Back-End foi um evento **gratuito** realizado de **18 a 22 de nov
 ## 🛠️ **Como Rodar o Projeto Localmente**
 1. Clone este repositório:
    ```bash
-   git clone https://github.com/SEU-USUARIO/imersao-dev-backend.git
+   git clone https://github.com/DEV-Dondon/Projeto_Alura_Instalike_back-end
