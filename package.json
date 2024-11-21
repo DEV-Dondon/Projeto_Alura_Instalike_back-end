@@ -1,31 +1,38 @@
 {
-  "name": "",
+  "name": "instalike-backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "Back-end do projeto Instalike, responsável pela gestão de posts e upload de imagens.",
   "main": "index.js",
   "type": "module",
-  "license": "AGPL-version-3.0",
+  "license": "AGPL-3.0",
   "private": false,
   "engines": {
-    "node": ">= 14.0.0",
-    "npm": ">= 6.0.0"
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
   },
-  "homepage": "",
+  "homepage": "https://www.exemplo.com",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/DEV-Dondon/Projeto_Alura_Instalike_back-end.git"
   },
-  "bugs": "",
-  "keywords": [],
+  "bugs": "https://github.com/DEV-Dondon/Projeto_Alura_Instalike_back-end/issues",
+  "keywords": [
+    "nodejs",
+    "express",
+    "mongodb",
+    "multer",
+    "api",
+    "backend"
+  ],
   "author": {
-    "name": "",
-    "email": "",
-    "url": ""
+    "name": "Lucivan filho",
+    "email": "filholucivan@gmail.com",
+    "url": "https://www.example.com"
   },
   "contributors": [],
   "scripts": {
     "dev": "node --watch --env-file=.env server.js",
-    "test": ""
+    "test": "echo \"No tests specified\" && exit 0"
   },
   "dependencies": {
     "express": "^4.21.1",
