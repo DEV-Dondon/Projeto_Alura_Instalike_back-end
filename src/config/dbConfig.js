@@ -2,6 +2,7 @@ import { MongoClient } from 'mongodb';
 
 export default async function conectarAoBanco(stringConexao) {
   let mongoClient;
+  
 
   try {
       mongoClient = new MongoClient(stringConexao);
