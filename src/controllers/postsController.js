@@ -1,14 +1,9 @@
 import { getTodosPosts, criarPost } from "../models/postsModel.js";
 import fs from "fs";
+import gerarDescricaoComGemini from "../services/geminiServices.js";
 export async function listarPosts(req, res) {
-    console.log("Recebida solicita o de lista de posts...")
-    // Chama a fun o para buscar os posts
-    // Chama a função para buscar os posts
     const posts = await getTodosPosts();
-    console.log("Posts recuperados com sucesso! Enviando resposta...")
-    // Envia uma resposta HTTP com status 200 (OK) e os posts no formato JSON
     res.status(200).json(posts);
-    console.log("Resposta enviada com sucesso!");
 }
 
 export async function postarNovoPost(req, res) {
@@ -37,5 +32,25 @@ export async function uploadImagem(req, res) {
     } catch (erro) {
         console.error(erro.message);
         res.status(500).json({ "Erro": "Falha na requisição" })
+    }
+}
+export async function atualizarNovoPost(req, res) {
+    const id = req.params.id;
+    const urlImagem = `http://localhost:3000/${id}.png`
+    try {
+        const imgBuffer = fs.readFileSync(`uploads/${id}.png`)
+        const descricao = await gerarDescricaoComGemini(imgBuffer)
+
+        const post = {
+            imgUrl: urlImagem,
+            descricao: descricao,
+            alt: req.body.alt
+        }
+
+        const postCriado = await atualizarPost(id, post);
+        res.status(200).json(postCriado);
+    } catch (erro) {
+        console.error(erro.message);
+        res.status(500).json({ "Erro": "Falha na requisição" });
     }
 }
