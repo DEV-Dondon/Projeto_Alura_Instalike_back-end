@@ -1,20 +1,20 @@
+import { MongoClient } from 'mongodb';
 import dotenv from 'dotenv';
-import { MongoClient } from 'mongodb'; // Importa o MongoClient do pacote mongodb
 
-dotenv.config(); // Carrega as variáveis do arquivo .env
+dotenv.config(); // Carrega as variáveis de ambiente
 
-const MONGO_URI = process.env.MONGO_URI; // Recupera a URI do banco de dados do arquivo .env
-const API_KEY = process.env.API_KEY; // Variável de chave da API
-const API_URL = process.env.API_URL; // URL da API
-
-console.log(MONGO_URI); // Exemplo de uso
-
-// Função para conectar ao MongoDB usando a URI do banco de dados
 export default async function conectarAoBanco() {
+  const stringConexao = process.env.MONGO_URI; // Use a variável de ambiente
+
+  if (!stringConexao) {
+    console.error("A string de conexão com o banco de dados não foi encontrada!");
+    process.exit(1); // Encerra o processo se a string de conexão não existir
+  }
+
   let mongoClient;
 
   try {
-    mongoClient = new MongoClient(MONGO_URI); // Usando MONGO_URI diretamente
+    mongoClient = new MongoClient(stringConexao, { useNewUrlParser: true, useUnifiedTopology: true });
     console.log('Conectando ao cluster do banco de dados...');
     await mongoClient.connect();
     console.log('Conectado ao MongoDB Atlas com sucesso!');
@@ -22,6 +22,6 @@ export default async function conectarAoBanco() {
     return mongoClient;
   } catch (erro) {
     console.error('Falha na conexão com o banco!', erro);
-    process.exit(1); // Garantir que o processo seja finalizado em caso de erro
+    process.exit(1); // Encerra o processo em caso de erro na conexão
   }
 }

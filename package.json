@@ -1,49 +1,33 @@
 {
-  "name": "instalike-backend",
+  "name": "",
   "version": "1.0.0",
-  "description": "Back-end do projeto Instalike, responsável pela gestão de posts e upload de imagens.",
+  "description": "",
   "main": "index.js",
   "type": "module",
-  "license": "AGPL-3.0",
+  "license": "AGPL-version-3.0",
   "private": false,
   "engines": {
-    "node": ">=14.0.0",
-    "npm": ">=6.0.0"
+    "node": ">= 14.0.0",
+    "npm": ">= 6.0.0"
   },
-  "homepage": "https://www.exemplo.com",
+  "homepage": "",
   "repository": {
     "type": "git",
-    "url": "https://github.com/DEV-Dondon/Projeto_Alura_Instalike_back-end.git"
+    "url": ""
   },
-  "bugs": "https://github.com/DEV-Dondon/Projeto_Alura_Instalike_back-end/issues",
-  "keywords": [
-    "nodejs",
-    "express",
-    "mongodb",
-    "multer",
-    "api",
-    "backend"
-  ],
+  "bugs": "",
+  "keywords": [],
   "author": {
-    "name": "Lucivan filho",
-    "email": "filholucivan@gmail.com",
-    "url": "https://www.example.com"
+    "name": "",
+    "email": "",
+    "url": ""
   },
   "contributors": [],
   "scripts": {
-    "dev": "nodemon --watch .env server.js",
-    "test": "echo \"No tests specified\" && exit 0"
-  },
-  "dependencies": {
-    "@google/generative-ai": "^0.21.0",
-    "cors": "^2.8.5",
-    "dotenv": "^16.4.5",
-    "express": "^4.21.1",
-    "joi": "^17.13.3",
-    "mongodb": "^6.10.0",
-    "multer": "^1.4.5-lts.1"
+    "dev": "npx parcel --port 8000 index.html",
+    "test": ""
   },
   "devDependencies": {
-    "nodemon": "^3.1.7"
+    "parcel": "^2.12.0"
   }
 }
