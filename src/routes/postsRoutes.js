@@ -3,8 +3,9 @@ import multer from "multer"; // Importa o Multer para lidar com uploads de arqui
 import { listarPosts, postarNovoPost, uploadImagem, atualizarNovoPost } from "../controllers/postsController.js"; // Importa as funções controladoras para lidar com a lógica dos posts
 import cors from "cors";
 
+// Configurações de CORS
 const corsOptions = {
-  origin: "http://localhost:8000",
+  origin: "http://localhost:8000", // Certifique-se de que o frontend está rodando nesta URL
   optionsSuccessStatus: 200
 }
 
@@ -20,14 +21,28 @@ const storage = multer.diskStorage({
   }
 });
 
-// Cria uma instância do middleware Multer
-const upload = multer({ storage: storage });
+// Função de validação de tipo de arquivo (apenas imagens)
+const fileFilter = (req, file, cb) => {
+  const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+  if (!allowedTypes.includes(file.mimetype)) {
+    return cb(new Error('Tipo de arquivo não permitido'), false);
+  }
+  cb(null, true);
+};
+
+// Cria uma instância do middleware Multer com validação de arquivo e limite de tamanho
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 5 * 1024 * 1024 }, // Limite de 5MB
+  fileFilter: fileFilter
+});
 
 // Define as rotas usando o objeto Express app
 const routes = (app) => {
   // Permite que o servidor interprete corpos de requisições no formato JSON
   app.use(express.json());
-  app.use(cors(corsOptions))
+  app.use(cors(corsOptions)); // Habilita CORS
+
   // Rota para recuperar uma lista de todos os posts
   app.get("/posts", listarPosts); // Chama a função controladora apropriada
 
@@ -35,9 +50,10 @@ const routes = (app) => {
   app.post("/posts", postarNovoPost); // Chama a função controladora para criação de posts
 
   // Rota para upload de imagens (assumindo uma única imagem chamada "imagem")
-  app.post("/upload", upload.single("imagem"), uploadImagem); // Chama a função controladora para processamento da imagem`
+  app.post("/upload", upload.single("imagem"), uploadImagem); // Chama a função controladora para processamento da imagem
 
-  app.put("/upload/:id", atualizarNovoPost)
+  // Rota para atualizar um post (com upload de imagem)
+  app.put("/upload/:id", atualizarNovoPost);
 };
 
 export default routes;
