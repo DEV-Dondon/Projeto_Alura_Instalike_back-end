@@ -1,12 +1,8 @@
-let { API_URL } = process.env;
-
-// Função para buscar os dados do endpoint
 export default async function fetchImages() {
-  try {
-    const response = await fetch(process.env.API_URL); // Usando a URL importada
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Erro ao buscar dados:", error);
-  }
+  // Exemplo de retorno simulado
+  return [
+    { imgUrl: "photos/ju.png", alt: "Foto da Ju", descricao: "Amiga" },
+    { imgUrl: "photos/veneza.png", alt: "Foto de Veneza", descricao: "Viagem" },
+    { imgUrl: "photos/robotica.jpeg", alt: "Robótica", descricao: "Futuro tecnológico" },
+  ];
 }

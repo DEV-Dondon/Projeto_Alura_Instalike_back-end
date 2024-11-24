@@ -1,66 +1,59 @@
-import fetchImages from "./fetchApis";
+import fetchImages from "./fetchApis.js";
 
+// Elementos do modal
 const modal = document.getElementById("modal");
 const modalImg = document.getElementById("modal-img");
 const captionText = document.getElementById("caption");
 const closeBtn = document.querySelector(".close");
-modal.style.display = "none";
 
+// Grid de imagens
 const imageGrid = document.querySelector(".image-grid");
 
-// Função para buscar e exibir os dados do endpoint
+// Função para exibir as imagens no grid
 async function displayImages() {
   try {
     const data = await fetchImages();
-    const postsList = data.map(item => {
-      return `
-        <article data-description="${item.descricao}">
-          <figure>
-            <img src="${item.imgUrl}" alt="${item.alt}" />
-          </figure>
-        </article>
-      `;
-    }).join('');
+    const fragment = document.createDocumentFragment();
 
-    imageGrid.insertAdjacentHTML('beforeend', postsList);
+    data.forEach(({ imgUrl, alt, descricao }) => {
+      const article = document.createElement("article");
+      const img = document.createElement("img");
+      img.src = imgUrl;
+      img.alt = alt;
+      article.dataset.description = descricao;
 
-    // Adicionando eventos de clique para cada imagem carregada
-    addImageClickEvents();
-  } catch (error) {
-    console.error("Erro ao popular página", error);
-  }
-}
+      // Configura o clique na imagem para abrir o modal
+      img.addEventListener("click", () => {
+        openModal(img.src, descricao);
+      });
 
-// Função para adicionar os eventos de clique às imagens
-function addImageClickEvents() {
-  const images = document.querySelectorAll(".image-grid img");
-  images.forEach(img => {
-    img.addEventListener("click", function () {
-      captionText.textContent = "";
-      modal.style.display = "flex"; // Usando 'flex' para centralizar o modal
-
-      modalImg.src = this.src;
-
-      const article = this.closest("article");
-      const description = article ? article.dataset.description : '';
-      const caption = description || this.alt;
-
-      captionText.innerHTML = `<p>${caption}</p>`;
+      article.appendChild(img);
+      fragment.appendChild(article);
     });
-  });
+
+    imageGrid.appendChild(fragment);
+  } catch (err) {
+    console.error("Erro ao carregar as imagens:", err);
+  }
 }
 
-// Evento de fechar o modal
-closeBtn.addEventListener("click", function () {
+// Função para abrir o modal
+function openModal(imageSrc, description) {
+  modal.style.display = "flex"; // Exibe o modal
+  modalImg.src = imageSrc; // Define a imagem no modal
+  captionText.textContent = description; // Define a descrição no modal
+}
+
+// Função para fechar o modal
+function closeModal() {
   modal.style.display = "none";
+}
+
+// Eventos para fechar o modal
+closeBtn.addEventListener("click", closeModal); // Fechar ao clicar no "x"
+window.addEventListener("click", (e) => {
+  if (e.target === modal) closeModal(); // Fechar ao clicar fora do modal
 });
 
-// Fechar o modal clicando fora dele
-window.addEventListener("click", function (event) {
-  if (event.target === modal) {
-    modal.style.display = "none";
-  }
-});
-
-// Chamar a função para buscar e exibir as imagens ao carregar a página
-document.addEventListener("DOMContentLoaded", displayImages);
+// Carrega as imagens ao iniciar
+window.addEventListener("DOMContentLoaded", displayImages);
