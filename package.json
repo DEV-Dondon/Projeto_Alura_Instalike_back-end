@@ -1,33 +1,41 @@
 {
-  "name": "",
+  "name": "meu-projeto",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Projeto configurado com Parcel como bundler.",
   "type": "module",
-  "license": "AGPL-version-3.0",
+  "license": "MIT",
   "private": false,
   "engines": {
-    "node": ">= 14.0.0",
-    "npm": ">= 6.0.0"
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
   },
-  "homepage": "",
+  "homepage": "https://meusite.com",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/usuario/repo.git"
   },
-  "bugs": "",
-  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/usuario/repo/issues",
+    "email": "suporte@meusite.com"
+  },
+  "keywords": [
+    "parcel",
+    "javascript",
+    "frontend"
+  ],
   "author": {
-    "name": "",
-    "email": "",
-    "url": ""
+    "name": "Seu Nome",
+    "email": "seu.email@exemplo.com",
+    "url": "https://seuwebsite.com"
   },
   "contributors": [],
   "scripts": {
     "dev": "npx parcel --port 8000 index.html",
-    "test": ""
+    "build": "npx parcel build index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
     "parcel": "^2.12.0"
   }
 }
+
