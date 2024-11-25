@@ -20,6 +20,7 @@ async function displayImages() {
       const img = document.createElement("img");
       img.src = imgUrl;
       img.alt = alt;
+      img.setAttribute("loading", "lazy"); // Lazy loading
       article.dataset.description = descricao;
 
       // Configura o clique na imagem para abrir o modal
@@ -42,11 +43,13 @@ function openModal(imageSrc, description) {
   modal.style.display = "flex"; // Exibe o modal
   modalImg.src = imageSrc; // Define a imagem no modal
   captionText.textContent = description; // Define a descrição no modal
+  modal.setAttribute('aria-hidden', 'false'); // Torna o modal acessível
 }
 
 // Função para fechar o modal
 function closeModal() {
   modal.style.display = "none";
+  modal.setAttribute('aria-hidden', 'true'); // Torna o modal inacessível
 }
 
 // Eventos para fechar o modal

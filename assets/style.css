@@ -153,7 +153,6 @@ body {
 /* Modal */
 .modal {
     display: none;
-    /* Modal escondido por padrão */
     position: fixed;
     z-index: 1000;
     left: 0;
@@ -161,7 +160,6 @@ body {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.8);
-    /* Fundo escuro semi-transparente */
     justify-content: center;
     align-items: center;
 }
@@ -176,86 +174,34 @@ body {
 #caption {
     margin-top: 1rem;
     color: white;
-    font-size: 1rem;
-    text-align: center;
+    font-size: 1.125rem;
 }
 
 .close {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
+    top: 2%;
+    right: 2%;
     font-size: 2rem;
     color: white;
+    background-color: transparent;
+    border: none;
     cursor: pointer;
+    transition: color var(--transition-fast);
+}
+
+.close:hover {
+    color: var(--tertiary-color);
 }
 
 /* Responsividade */
-@media (max-width: 480px) {
-    .navbar .logo {
-        font-size: 1.5rem;
+@media screen and (max-width: 768px) {
+    .image-grid {
+        grid-template-columns: 1fr 1fr;
     }
+}
 
-    .nav-links {
-        gap: 0.9rem;
-        font-size: 0.75rem;
-    }
-
-    .profile-pic {
-        width: 4rem;
-        height: 4rem;
-        margin-right: 1rem;
-    }
-
-    .profile-info h1 {
-        font-size: 1rem;
-    }
-
-    .profile-info p {
-        font-size: 0.75rem;
-    }
-
+@media screen and (max-width: 500px) {
     .image-grid {
         grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-
-    .image-grid img {
-        width: 100%;
-        height: auto;
-    }
-
-    .modal-content {
-        max-width: 80%;
-        max-height: 80vh;
-    }
-
-    .close {
-        right: 1.5rem;
-        font-size: 2rem;
-        top: 2.75rem;
-    }
-
-    #caption {
-        max-width: 80%;
-        font-size: 0.8rem;
-        padding: 1rem;
-        line-height: 1.2;
-    }
-}
-
-@media (min-width: 481px) and (max-width: 868px) {
-    .image-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .image-grid img {
-        width: 100%;
-        height: 14rem;
-    }
-}
-
-@media (min-width: 1000px) {
-    .image-grid {
-        grid-template-columns: repeat(3, 1fr);
     }
 }
